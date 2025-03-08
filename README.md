@@ -5,6 +5,7 @@
 
 A robust HTTP proxy management plugin for [Saloon PHP](https://github.com/saloonphp/saloon), allowing you to easily use and rotate proxies in your API requests.
 
+[中文文档](README.zh.md) | [English](README.md)
 ## Features
 
 - 🔄 Proxy rotation with round-robin support
