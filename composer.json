@@ -1,0 +1,53 @@
+{
+    "name": "weijiajia/saloonphp-http-proxy-plugin",
+    "description": "A robust HTTP proxy management plugin for Saloon PHP, allowing easy proxy rotation and failover.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "saloon",
+        "saloonphp",
+        "http",
+        "proxy",
+        "api",
+        "rotation",
+        "round-robin"
+    ],
+    "require": {
+        "php": "^8.0",
+        "saloonphp/saloon": "^3.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.7",
+        "phpstan/phpstan": "^1.10",
+        "friendsofphp/php-cs-fixer": "^3.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "Weijiajia\\SaloonphpHttpProxyPlugin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Weijiajia\\SaloonphpHttpProxyPlugin\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "weijiajia",
+            "email": "shadowmatthew1025@gmail.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "analyse": "vendor/bin/phpstan analyse",
+        "fix": "vendor/bin/php-cs-fixer fix"
+    }
+}
