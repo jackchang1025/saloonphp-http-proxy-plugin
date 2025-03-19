@@ -1,6 +1,6 @@
 <?php
 
-namespace Weijiajia\SaloonphpHttpProxyPlugin;
+namespace Weijiajia\SaloonphpHttpProxyPlugin\Contracts;
 
 interface ProxyInterface
 {

@@ -2,6 +2,8 @@
 
 namespace Weijiajia\SaloonphpHttpProxyPlugin;
 
+use Weijiajia\SaloonphpHttpProxyPlugin\Contracts\ProxyInterface;
+
 class Proxy implements ProxyInterface
 {
 

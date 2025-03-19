@@ -4,22 +4,33 @@ namespace Weijiajia\SaloonphpHttpProxyPlugin;
 
 use InvalidArgumentException;
 use SplQueue;
-
+use Weijiajia\SaloonphpHttpProxyPlugin\Contracts\ProxyInterface;
 
 class ProxySplQueue extends SplQueue
 {
-    /**
-     * 构造函数
-     *
-     * @param array $proxies 初始代理列表
-     */
-    public function __construct(array $proxies = []) 
+    
+    public function __construct(protected bool $roundRobinEnabled = false,array $proxies = []) 
     {
-        
-        // 初始化队列
         foreach ($proxies as $proxy) {
             $this->enqueue($proxy);
         }
+    }
+
+     /**
+     * 设置轮换模式
+     */
+    public function setRoundRobinEnabled(bool $enabled): self
+    {
+        $this->roundRobinEnabled = $enabled;
+        return $this;
+    }
+
+     /**
+     * 获取轮换模式状态
+     */
+    public function isRoundRobinEnabled(): bool
+    {
+        return $this->roundRobinEnabled;
     }
     
     /**
@@ -32,17 +43,14 @@ class ProxySplQueue extends SplQueue
      */
     public function enqueue(mixed $value): void
     {
-        // 如果传入字符串URL，转换为代理对象
         if (is_string($value)) {
             $value = Proxy::fromUrl($value);
         }
         
-        // 确保传入的是 ProxyInterface 类型
         if (!$value instanceof ProxyInterface) {
             throw new InvalidArgumentException('Only ProxyInterface objects or proxy URLs can be added to the queue');
         }
         
-        // 调用父类实现添加到队列
         parent::enqueue($value);
     }
     
@@ -56,9 +64,14 @@ class ProxySplQueue extends SplQueue
         if ($this->isEmpty()) {
             return null;
         }
+
+       $proxy = parent::dequeue();
         
-        // 从队列前端获取代理，不再循环使用
-        return parent::dequeue();
+        if ($this->isRoundRobinEnabled() && $proxy instanceof ProxyInterface && $proxy->isAvailable()) {
+            parent::enqueue($proxy);
+        }
+        
+        return $proxy;
     }
     
     /**
