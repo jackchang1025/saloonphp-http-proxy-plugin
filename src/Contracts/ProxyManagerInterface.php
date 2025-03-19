@@ -10,6 +10,11 @@ interface ProxyManagerInterface
      * 获取代理队列
      */
     public function getProxyQueue(): ProxySplQueue;
+
+    /**
+     * 设置代理队列
+     */
+    public function withProxyQueue(ProxySplQueue $proxyQueue): static;
     
     /**
      * 获取代理启用状态
@@ -21,8 +26,4 @@ interface ProxyManagerInterface
      */
     public function isForceProxyEnabled(): bool;
     
-    // /**
-    //  * 获取代理切换条件
-    //  */
-    // public function getProxySwitchCondition(): callable;
 }

@@ -30,14 +30,6 @@ trait HasProxy
      */
     protected bool $proxyEnabled = true;
 
-    /**
-     * 设置代理切换条件
-     */
-    public function switchProxyWhen(callable $condition): static
-    {
-        $this->proxySwitchCondition = $condition;
-        return $this;
-    }
 
     /**
      * 设置轮换模式 - 代理到队列的方法
