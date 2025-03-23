@@ -100,6 +100,12 @@ $proxy = new Proxy(
 );
 
 $connector->getProxyQueue()->enqueue($proxy);
+
+// Set a custom proxy queue
+use Weijiajia\SaloonphpHttpProxyPlugin\ProxySplQueue;
+
+$proxyQueue = new ProxySplQueue(roundRobinEnabled: true, proxies: ['http://proxy1.example.com:8080']);
+$connector->withProxyQueue($proxyQueue); // Use new method name
 ```
 
 ### Proxy Rotation

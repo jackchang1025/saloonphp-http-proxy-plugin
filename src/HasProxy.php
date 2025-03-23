@@ -3,9 +3,7 @@
 namespace Weijiajia\SaloonphpHttpProxyPlugin;
 
 use GuzzleHttp\RequestOptions;
-use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\PendingRequest;
-use Saloon\Http\Response;
 use Saloon\Traits\Conditionable;
 use Weijiajia\SaloonphpHttpProxyPlugin\Contracts\ProxyManagerInterface;
 use Weijiajia\SaloonphpHttpProxyPlugin\Exceptions\NoAvailableProxyException;
@@ -49,7 +47,7 @@ trait HasProxy
     }
 
     /**
-     * 设置代理队列
+     * 设置代理队列 
      */
     public function withProxyQueue(ProxySplQueue $queue): static
     {
