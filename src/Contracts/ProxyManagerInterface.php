@@ -9,12 +9,12 @@ interface ProxyManagerInterface
     /**
      * 获取代理队列
      */
-    public function getProxyQueue(): ProxySplQueue;
+    public function getProxyQueue(): ?ProxySplQueue;
 
     /**
      * 设置代理队列
      */
-    public function withProxyQueue(ProxySplQueue $proxyQueue): static;
+    public function withProxyQueue(?ProxySplQueue $proxyQueue = null): static;
     
     /**
      * 获取代理启用状态
