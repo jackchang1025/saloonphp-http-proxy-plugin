@@ -41,15 +41,15 @@ trait HasProxy
     /**
      * 获取代理队列
      */
-    public function getProxyQueue(): ProxySplQueue
+    public function getProxyQueue(): ?ProxySplQueue
     {
-        return $this->proxyQueue ??= new ProxySplQueue();
+        return $this->proxyQueue;
     }
 
     /**
      * 设置代理队列 
      */
-    public function withProxyQueue(ProxySplQueue $queue): static
+    public function withProxyQueue(?ProxySplQueue $queue = null): static
     {
         $this->proxyQueue = $queue;
         return $this;
@@ -114,7 +114,7 @@ trait HasProxy
             return;
         }
         
-        $proxy = $proxyManager->getProxyQueue()->dequeue();
+        $proxy = $proxyManager->getProxyQueue()?->dequeue();
         
         if ($proxy === null && $proxyManager->isForceProxyEnabled()) {
             throw new NoAvailableProxyException('No available proxy');
